@@ -3,22 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package HelloWorld;
+package scriptures;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import scriptures.model.FileScriptureHandler;
+import scriptures.model.HardCodedScriptureHandler;
+import scriptures.model.Scripture;
+import scriptures.model.ScriptureDataHandler;
 
 /**
  *
  * @author Felipe
  */
-@WebServlet(name = "HelloServlet", urlPatterns = {"/HelloServlet"})
-public class HelloServlet extends HttpServlet {
+@WebServlet(name = "ShowList", urlPatterns = {"/ShowList"})
+public class ShowList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,11 +43,10 @@ public class HelloServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HelloServlet</title>");            
+            out.println("<title>Servlet ShowList</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Hello Servlet World</h1>");
-            out.println("<p>" + request.getContextPath() + "</p>");
+            out.println("<h1>Servlet ShowList at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,21 +64,9 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+        ScriptureDataHandler handler = new FileScriptureHandler("list.txt");
+        request.setAttribute("scriptures", handler.getFavoriteScriptures());
+        request.getRequestDispatcher("scriptureList.jsp").forward(request, response);
     }
 
     /**

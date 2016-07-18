@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package HelloWorld;
+package connectAPI;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Felipe
  */
-@WebServlet(name = "HelloServlet", urlPatterns = {"/HelloServlet"})
-public class HelloServlet extends HttpServlet {
+@WebServlet(name = "Connetion", urlPatterns = {"/Connetion"})
+public class Connetion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,17 +33,9 @@ public class HelloServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HelloServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Hello Servlet World</h1>");
-            out.println("<p>" + request.getContextPath() + "</p>");
-            out.println("</body>");
-            out.println("</html>");
+            WalmartAPI walmart = new WalmartAPI();
+            walmart.productLookup();
+            
         }
     }
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package HelloWorld;
+package loginApp;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Felipe
+ * @author sburton
  */
-@WebServlet(name = "HelloServlet", urlPatterns = {"/HelloServlet"})
-public class HelloServlet extends HttpServlet {
+@WebServlet(name = "login", urlPatterns = {"/login"})
+public class login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,19 +31,22 @@ public class HelloServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HelloServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Hello Servlet World</h1>");
-            out.println("<p>" + request.getContextPath() + "</p>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        // obviously these belong in a DB or something...
+        String correctName = "sburton";
+        String correctPassword = "cs313";
+
+        String username = request.getParameter("txtUsername");
+        String password = request.getParameter("txtPassword");
+
+        if (username != null && password != null
+                && username.equals(correctName) && password.equals(correctPassword)) {
+
+            // correct username and password!
+            request.getSession().setAttribute("username", username);
+            response.sendRedirect("welcome.jsp");
+        } else {
+            response.sendRedirect("badLogin.jsp");
         }
     }
 

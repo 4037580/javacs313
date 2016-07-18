@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package HelloWorld;
+package calculations;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Felipe
  */
-@WebServlet(name = "HelloServlet", urlPatterns = {"/HelloServlet"})
-public class HelloServlet extends HttpServlet {
+@WebServlet(name = "ComputeSum", urlPatterns = {"/ComputeSum"})
+public class ComputeSum extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,11 +37,10 @@ public class HelloServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HelloServlet</title>");            
+            out.println("<title>Servlet ComputerSum</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Hello Servlet World</h1>");
-            out.println("<p>" + request.getContextPath() + "</p>");
+            out.println("<h1>Servlet ComputerSum at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,7 +58,12 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int num1 = Integer.parseInt(request.getParameter("first")); 
+        int num2 = Integer.parseInt(request.getParameter("second"));
+
+        int sum = num1 + num2;
+        request.setAttribute("sum", sum);
+        request.getRequestDispatcher("/result.jsp").forward(request, response);
     }
 
     /**

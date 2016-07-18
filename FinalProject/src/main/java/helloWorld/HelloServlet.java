@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package HelloWorld;
+package helloWorld;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,8 +40,7 @@ public class HelloServlet extends HttpServlet {
             out.println("<title>Servlet HelloServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Hello Servlet World</h1>");
-            out.println("<p>" + request.getContextPath() + "</p>");
+            out.println("<h1>Final Project Felipe</h1>");
             out.println("</body>");
             out.println("</html>");
         }
